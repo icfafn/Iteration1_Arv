@@ -6,19 +6,25 @@ using System.Threading.Tasks;
 
 namespace Fagtilmeldingsapp.Codes
 {
-    internal class School
+    internal abstract class School
 
     {
-       
-        public string? SchoolName, Uddannelselinje;
-        public School()
+
+        public string? SchoolName { get; set; }
+
+        public School(string? schoolname)
         {
-            Console.Write("Angiv Skole: ");
-            SchoolName = Console.ReadLine();
-            Console.Write("Angiv Uddannelselinje: ");
-            Uddannelselinje = Console.ReadLine();
+            SchoolName = schoolname;
         }
+
+        public abstract void SetUddanelseslinje(string? uddanelsesLinje);
+
+
     }
+
+
+
+    
     
         
 }

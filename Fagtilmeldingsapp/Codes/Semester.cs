@@ -8,11 +8,16 @@ namespace Fagtilmeldingsapp.Codes
 {
     internal class Semester : School
     {
-        public string? SemesterNavn;
-         public Semester()
+        public string? SemesterNavn { get; set; }
+        public string? UddannelsesLinje { get; set; }
+         public Semester(string? schoolName,string? semesterNavn) : base(schoolName)
         {
-            Console.Write("Angiv Hovedforløb: ");
-           SemesterNavn = Console.ReadLine();
+            SemesterNavn = semesterNavn;
+        }
+
+        public override void SetUddannelseslinje(string? UddannelsesLinje)
+        {
+            UddannelsesLinje = uddannelseslinje;
         }
     }
 
