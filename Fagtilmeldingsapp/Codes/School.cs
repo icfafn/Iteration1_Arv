@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 namespace Fagtilmeldingsapp.Codes
 {
     internal class School
+
     {
-        public string? SchoolName;
+       
+        public string? SchoolName, Uddannelselinje;
         public School()
         {
             Console.Write("Angiv Skole: ");
             SchoolName = Console.ReadLine();
+            Console.Write("Angiv Uddannelselinje: ");
+            Uddannelselinje = Console.ReadLine();
         }
     }
     

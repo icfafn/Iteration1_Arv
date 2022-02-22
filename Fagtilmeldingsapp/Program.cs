@@ -11,7 +11,7 @@ Semester S = new Semester();
 Console.Clear();
 Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("------------------------------------------------------");
-Console.WriteLine(S.SchoolName + " " + S.SemesterNavn + " " + "Fag Tilmeldings App");
+Console.WriteLine(S.SchoolName + " " + S.Uddannelselinje + " " +  S.SemesterNavn + " " + "Fag Tilmeldings App");
 Console.WriteLine("------------------------------------------------------");
 Console.WriteLine();
 
