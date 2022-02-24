@@ -1,129 +1,133 @@
-string errorMessage = null;
+using FagTilmeldingApp.Codes;
 
-List<TeacherModel> listTeachers = new()
-{
-    new TeacherModel() { Id = 1, FirstName = "Niels", LastName = "Henriksen" },
-    new TeacherModel() { Id = 2, FirstName = "Michael", LastName = "Thomasen" },
-    new TeacherModel() { Id = 3, FirstName = "Klaus", LastName = "Pedersen" }
-};
+string AngivSkole;
+string AngivForløb;
+string AngivLinje;
 
-List<CourseModel> listCourses = new()
-{
-    new CourseModel() { Id = 1, Course = "Grundlæggende programmering" },
-    new CourseModel() { Id = 2, Course = "Database programmering" },
-    new CourseModel() { Id = 3, Course = "Studieteknik" }
-};
-List<StudentModel> listStudents = new()
-{
-    new StudentModel() { Id = 1, FirstName = "Martin", LastName = "Jensen" },
-    new StudentModel() { Id = 2, FirstName = "Patrik", LastName = "Nielsen" },
-    new StudentModel() { Id = 3, FirstName = "Susanne", LastName = "Hansen" },
-    new StudentModel() { Id = 4, FirstName = "Thomas", LastName = "Olsen" }
-};
+Console.WriteLine("Angiv skole: ");
+AngivSkole = Console.ReadLine();
+Console.WriteLine("Angiv hovedforløb: ");
+AngivForløb = Console.ReadLine();
+Console.WriteLine("Angiv uddannelseslinje: ");
+AngivLinje = Console.ReadLine();
 
-List<Enrollment> listEnrollment = new();
-
-
-Console.WriteLine("Angiv skole?");
-
-string? skole = Console.ReadLine();
-
-Console.WriteLine("Angiv forløb?");
-
-string? fag = Console.ReadLine();
-
-Semester semester = new(skole, fag);
+Semester s = new(AngivSkole, AngivForløb);
+;
 
 Console.Clear();
 
-Validation v = new Validation();
+s.SetUddannelsesLinje(AngivLinje);
+
+List<Teacher> TeacherList = new()
+{
+    new Teacher() {LærerId = 1, ForNavn = "Niels", EfterNavn = "Olesen"},
+    new Teacher() {LærerId = 2, ForNavn = "Henrik", EfterNavn = "Poulsen" }
+};
+
+List<Student> ElevList = new()
+{
+    new Student() { ElevId = 1, ForNavn = "Martin", EfterNavn = "Jensen" },
+    new Student() { ElevId = 2, ForNavn = "Patrik", EfterNavn = "Nielsen"},
+    new Student() { ElevId = 3, ForNavn = "Susanne", EfterNavn = "Hansen" },
+    new Student() { ElevId = 4, ForNavn = "Thomas", EfterNavn = "Olsen" }
+};
+
+List<Course> KurseList = new()
+{
+    new Course() { CourseId = 1, CourseName = "Grundlæggende Programmering", TeacherId = 1 },
+    new Course() { CourseId = 2, CourseName = "Database Programmering", TeacherId = 1 },
+    new Course() { CourseId = 3, CourseName = "Studieteknik", TeacherId = 1 }
+};
+
+Enrollment E1 = new Enrollment();
+List<Enrollment> Elist = new List<Enrollment>() { };
+
+int UserElevId = 0;
+int UserCourseId = 0;
 
 while (true)
 {
     Console.Clear();
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("---------------------------------------");
-    Console.WriteLine($"{skole}, {fag} forløb tilmelding app");
-    Console.WriteLine("---------------------------------------");
-    Console.ForegroundColor = ConsoleColor.White;
+    Console.WriteLine("----------------------------------------------------------------");
+    Console.WriteLine(s.SchoolName + ", " + s.Uddannelseslinje + ", " + s.SemesterNavn + " " + "fag timelding app.");
+    Console.WriteLine("----------------------------------------------------------------");
 
-
-    List<Enrollment> listEleverDisplay = listEnrollment.Where(a => a.FagId == 1).ToList();
-    Console.WriteLine($"{listEleverDisplay.Count()} Elever i grundlæggende programmering");
-
-    listEleverDisplay = listEnrollment.Where(a => a.FagId == 2).ToList();
-    Console.WriteLine($"{listEleverDisplay.Count()} Elever i database programmering");
-
-    listEleverDisplay = listEnrollment.Where(a => a.FagId == 3).ToList();
-    Console.WriteLine($"{listEleverDisplay.Count()} Elever i studieteknik");
-    Console.WriteLine("---------------------------------------");
-
+    List<Enrollment> list = Elist.Where(a => a.CourseId == 1).ToList();
+    Console.WriteLine("Elever i Grundlæggende programmering: " + list.Count());
+    list = Elist.Where(a => a.CourseId == 2).ToList();
+    Console.WriteLine("Elever i Database programmering: " + list.Count());
+    list = Elist.Where(a => a.CourseId == 3).ToList();
+    Console.WriteLine("Elever i Studieteknik: " + list.Count());
     Console.WriteLine();
-    foreach (Enrollment displayInformation in listEnrollment)
+
+    List<Student> students = ElevList.Where(a => a.ElevId == UserElevId).ToList();
+    List<Course> courses = KurseList.Where(a => a.CourseId == UserCourseId).ToList();
+    foreach (Student student in students)
     {
-        CourseModel displayFag = listCourses.FirstOrDefault(a => a.Id == displayInformation.Id);
-        StudentModel displayElev = listStudents.FirstOrDefault(a => a.Id == displayInformation.Id);
-
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"{errorMessage}");
-        Console.ForegroundColor = ConsoleColor.White;
-        //nulstiller errorMessage
-        errorMessage = null;
-
-        Console.WriteLine();
-        
-        if (displayElev != null && displayFag != null)
-            Console.WriteLine($"{displayElev.FirstName} {displayElev.LastName} er tilmeldt {displayFag.Course}");
-        Console.WriteLine();
+        Console.Write(student.ForNavn + " " + student.EfterNavn + " tilmeldt fag ");
     }
-
-    bool succes = false;
-    while (!succes)
+    foreach (Course course in courses)
     {
-        Console.WriteLine("Indtast FagID");
-        string FagID = Console.ReadLine();
-        succes = v.ValidationCourse(FagID, listCourses);
-        if (succes)
+        Console.Write(course.CourseName);
+    }
+    Console.WriteLine("\n---------------------------------------------------------------- \n");
+
+    while (UserElevId != null)
+    {
+        Console.WriteLine("\nElevID: ");
+        try
         {
-            Console.WriteLine("Indtast ElevID");
-            string ElevID = Console.ReadLine();
+            UserElevId = Convert.ToInt32(Console.ReadLine());
 
-            succes = v.ValidationStudent(ElevID, listStudents);
-            if (succes)
+            if (UserElevId <= 4 && UserElevId != 0)
             {
-                succes = v.EnrollmentValidation(listEnrollment);
-                if (!succes)
-                {
-                    errorMessage = "Eksistere allerede.";
-                    break;
-                }
-                else
-                {
-
-                    listEnrollment.Add(new Enrollment() { Id = listEnrollment.Count() + 1, FagId = v.FagID, ElevId = v.ElevID });
-
-                    Console.WriteLine("");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    CourseModel displayFag = listCourses.FirstOrDefault(a => a.Id == v.FagID);
-                    StudentModel displayElev = listStudents.FirstOrDefault(a => a.Id == v.ElevID);
-                    errorMessage = ($"{displayElev.FirstName} {displayElev.LastName} er tilmeldt {displayFag.Course}.");
-                    Console.WriteLine($"{errorMessage}");
-                    Console.WriteLine("");
-                    Console.ReadKey();
-                }
+                E1.ElevId = Convert.ToInt32(UserElevId);
+                break;
             }
             else
             {
-                errorMessage = v.ErrorMessage;
-                break;
+                Console.WriteLine("Elev findes ikke");
             }
         }
-        else
+        catch
         {
-            errorMessage = v.ErrorMessage;
-            break;
+            Console.WriteLine("Det er ikke et tal");
         }
     }
-}
 
-Console.ReadKey();
+    while (UserCourseId != null)
+    {
+        Console.WriteLine("\nKurse ID: ");
+        try
+        {
+            UserCourseId = Convert.ToInt32(Console.ReadLine());
+
+            if (UserCourseId == 1 || UserCourseId == 2 || UserCourseId == 3)
+            {
+                E1.CourseId = Convert.ToInt32(UserCourseId);
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Kurse findes ikke");
+            }
+        }
+        catch
+        {
+            Console.WriteLine("Det er ikke et tal");
+        }
+    }
+
+    List<Enrollment> tests = Elist.Where(a => a.ElevId == UserElevId && a.CourseId == UserCourseId).ToList();
+    if(tests.Count == 0)
+    { 
+    Elist.Add(new Enrollment() { EnrollmentId = Elist.Count() + 1, ElevId = UserElevId, CourseId = UserCourseId });
+    }
+    else
+    {
+        Console.WriteLine("\nStudent already exist in that class - Try again!");
+        UserElevId = 0;
+        UserCourseId = 0;
+        Console.ReadKey();
+    }
+}
