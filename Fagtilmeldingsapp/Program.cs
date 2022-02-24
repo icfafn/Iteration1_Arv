@@ -1,15 +1,16 @@
-﻿using Fagtilmeldingsapp.Codes;
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine("Tilmeldings app for lærere");
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine();
+using FagTilmeldingApp.Codes;
 
-Semester S = new Semester();
+string AngivSkole;
+string AngivForløb;
+
+Console.WriteLine("Angiv fag: ");
+AngivSkole = Console.ReadLine();
+Console.WriteLine("Angiv hovedforløb: ");
+AngivForløb = Console.ReadLine();
+
+Semester s = new(AngivSkole, AngivForløb);
 
 Console.Clear();
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine(S.SchoolName + " " + S.SemesterNavn + " " + "Tilmeldings App");
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine();
+
+Console.WriteLine(s.SchoolName + ", " +  s.SemesterNavn + " " + "fag timelding app.");
 Console.ReadKey();
