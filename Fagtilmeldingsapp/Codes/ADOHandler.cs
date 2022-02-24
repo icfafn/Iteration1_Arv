@@ -11,7 +11,7 @@ namespace FagTilmeldingApp.Codes
     {
         public string? ConnectionString 
         {
-            get => "Data Source=MARTIN-PC;Initial Catalog=TEC;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            get => "Data Source=DESKTOP-3EN3CKT;Initial Catalog=TEC;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
         public List<Teacher> GetTeacher()
         {
