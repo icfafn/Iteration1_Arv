@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace FagTilmeldingApp.Codes
 {
-
     internal sealed class Semester : School
     {
-        string SemesterNavn { get; set; }
+        public string? SemesterNavn { get; set; }
+        public string? Uddannelseslinje { get; set; }  
 
-        public Semester(string semesterNavn, string schoolName) : base(schoolName)
+        public Semester(string schoolName, string semesterNavn) : base(schoolName)
         {
             SemesterNavn = semesterNavn;
         }
+        public override void SetUddannelsesLinje(string uddannelseslinje)
+        {
+            Uddannelseslinje = uddannelseslinje;
+        }
+
     }
 }
