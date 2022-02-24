@@ -1,24 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fagtilmeldingsapp.Codes
+namespace FagTilmeldingApp.Codes
 {
-    internal class School
-
+    //abstract indkapsler School så den kun kan være parentklasse.
+    internal abstract class School 
     {
-       
-        public string? SchoolName, Uddannelselinje;
-        public School()
+        public string SchoolName { get; set; }
+
+        public School (string schoolName)
         {
-            Console.Write("Angiv Skole: ");
-            SchoolName = Console.ReadLine();
-            Console.Write("Angiv Uddannelselinje: ");
-            Uddannelselinje = Console.ReadLine();
+            SchoolName = schoolName;
         }
+       
+        //hvis man ikke ved hvad kroppen skal være, men kender metoden. Derfor abstract så jeg laver child lave kroppen.
+        public abstract void SetUddannelseslinje(string? uddannelsesLinje);
     }
-    
-        
 }
