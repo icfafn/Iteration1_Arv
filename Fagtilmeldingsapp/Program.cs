@@ -1,77 +1,122 @@
-﻿using Fagtilmeldingsapp.Codes;
-using Fagtilmeldingsapp.Codes.Models;
-//Iteration4
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine("Tilmeldings app for lærere");
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine();
+string errorMessage = null;
 
-Semester S = new Semester();
+List<TeacherModel> listTeachers = new()
+{
+    new TeacherModel() { Id = 1, FirstName = "Niels", LastName = "Henriksen" },
+    new TeacherModel() { Id = 2, FirstName = "Michael", LastName = "Thomasen" },
+    new TeacherModel() { Id = 3, FirstName = "Klaus", LastName = "Pedersen" }
+};
+
+List<CourseModel> listCourses = new()
+{
+    new CourseModel() { Id = 1, Course = "Grundlæggende programmering" },
+    new CourseModel() { Id = 2, Course = "Database programmering" },
+    new CourseModel() { Id = 3, Course = "Studieteknik" }
+};
+List<StudentModel> listStudents = new()
+{
+    new StudentModel() { Id = 1, FirstName = "Martin", LastName = "Jensen" },
+    new StudentModel() { Id = 2, FirstName = "Patrik", LastName = "Nielsen" },
+    new StudentModel() { Id = 3, FirstName = "Susanne", LastName = "Hansen" },
+    new StudentModel() { Id = 4, FirstName = "Thomas", LastName = "Olsen" }
+};
+
+List<Enrollment> listEnrollment = new();
+
+
+Console.WriteLine("Angiv skole?");
+
+string? skole = Console.ReadLine();
+
+Console.WriteLine("Angiv hovedforløb?");
+
+string? semesterNavn = Console.ReadLine();
+
+Console.WriteLine("Angiv uddannelseslinje");
+
+string? uddannelsesLinje = Console.ReadLine();
+
+Semester semester = new(skole, semesterNavn);
+
+semester.SetUddannelseslinje(uddannelsesLinje);
 
 Console.Clear();
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine(S.SchoolName + " " + S.Uddannelselinje + " " +  S.SemesterNavn + " " + "Fag Tilmeldings App");
-Console.WriteLine("------------------------------------------------------");
-Console.WriteLine();
 
-Console.WriteLine("Elever i Grundlæggende Programmering");
-Console.WriteLine("Elever i Database Programmering");
-Console.WriteLine("Elever i Studieteknik");
+Validation v = new Validation();
 
-
-List<Teacher> lstTeachers = new()
+while (true)
 {
-    new Teacher()
-    { Id = 1, FirstName = "Niels", LastName = "Olesen" },
-    new Teacher()
-    { Id = 2, FirstName = "Henrik", LastName = "Poulsen" },
-    new Teacher()
-    { Id = 3, FirstName = "Tanja", LastName = "Olesen" },
-    
-};
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("---------------------------------------");
+    Console.WriteLine($"{semester.SchoolName}, {semester.UddannelsesLinje}, {semester.SemesterNavn} fag tilmelding app");
+    Console.WriteLine("---------------------------------------");
+    Console.ForegroundColor = ConsoleColor.White;
 
+    List<Enrollment> listEleverDisplay = listEnrollment.Where(a => a.FagId == 1).ToList();
+    Console.WriteLine($"{listEleverDisplay.Count()} Elever i grundlæggende programmering");
 
+    listEleverDisplay = listEnrollment.Where(a => a.FagId == 2).ToList();
+    Console.WriteLine($"{listEleverDisplay.Count()} Elever i database programmering");
 
+    listEleverDisplay = listEnrollment.Where(a => a.FagId == 3).ToList();
+    Console.WriteLine($"{listEleverDisplay.Count()} Elever i studieteknik");
+    Console.WriteLine("---------------------------------------");
 
-//List<Teacher> teachers = lstTeachers.Where(a => a.LastName == "Olesen").ToList();
-//foreach (Teacher teacher in teachers) 
-//{ Console.WriteLine($"Id aflærermed efternavnOlesen: {teachers.Id}"); }
-//// Tæl hvor mange rækker der er i listen:
-//int rækker = teachers.Count();
+    Console.WriteLine();
+    foreach (Enrollment displayInformation in listEnrollment)
+    {
+        CourseModel displayFag = listCourses.FirstOrDefault(a => a.Id == displayInformation.Id);
+        StudentModel displayElev = listStudents.FirstOrDefault(a => a.Id == displayInformation.Id);
 
-//Teacher teacher = lstTeachers.FirstOrDefault(a => a.LastName == "Olesen");
-//// Hvis ingen match er, vil rowvære null, derfor tjek for null.
-//if(teacher!= null){Console.WriteLine($"Id aflærermed efternavnOlesen: {teacher.Id}");}
+        Console.ForegroundColor = ConsoleColor.Red;
+        if (errorMessage != null)
+        {
+            Console.WriteLine($"{errorMessage}");
+        }
+        Console.ForegroundColor = ConsoleColor.White;
+        errorMessage = null;
+        
+        if (displayElev != null && displayFag != null)
+            Console.WriteLine($"{displayElev.FirstName} {displayElev.LastName} er tilmeldt {displayFag.Course}");
+    }
+    Console.WriteLine("---------------------------------------");
 
+    bool succes = false;
+    while (!succes)
+    {
+        Console.WriteLine("Indtast FagID");
+        string FagID = Console.ReadLine();
+        succes = v.ValidationCourse(FagID, listCourses);
+        if (succes)
+        {
+            Console.WriteLine("Indtast ElevID");
+            string ElevID = Console.ReadLine();
 
-List<Student> lstStudent = new()
-{
-    new Student()
-    { Id = 1, FirstName = "Martin", LastName = "Jensen" },
-    new Student()
-    { Id = 2, FirstName = "Patrick", LastName = "Nielsen" },
-    new Student()
-    { Id = 3, FirstName = "Susanne", LastName = "Hansen" },
-    new Student()
-    { Id = 4, FirstName = "Thomas", LastName = "Olsen" }
-};
-
-List<Course> lstCourse = new()
-{
-    new Course()
-    { Id = 1, Coursename = "Grundlæggende Programmering", Teacherid = 1 },
-    new Course()
-    { Id = 2, Coursename = "Database Programmering", Teacherid = 1 },
-    new Course()
-    { Id = 6, Coursename = "Studieteknik", Teacherid = 1 },
-    new Course()
-    { Id = 7, Coursename = "Clientside Programmering", Teacherid = 2 }
-};
-
-List<Enrollment> en = new()
-{
-
-};
-
-Console.ReadKey();
+            succes = v.ValidationStudent(ElevID, listStudents);
+            if (succes)
+            {
+                succes = v.EnrollmentValidation(listEnrollment);
+                if (!succes)
+                {
+                    errorMessage = "Eksistere allerede.";
+                    break;
+                }
+                else
+                {
+                    listEnrollment.Add(new Enrollment() { Id = listEnrollment.Count() + 1, FagId = v.FagID, ElevId = v.ElevID });
+                }
+            }
+            else
+            {
+                errorMessage = v.ErrorMessage;
+                break;
+            }
+        }
+        else
+        {
+            errorMessage = v.ErrorMessage;
+            break;
+        }
+    }
+}
