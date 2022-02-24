@@ -35,7 +35,6 @@ namespace FagTilmeldingApp.Codes
                 teachers.Add(teacher);
             }
 
-            //con.Close(); - Kun hvis man ikke har using
            
             return teachers;
         }
@@ -62,7 +61,6 @@ namespace FagTilmeldingApp.Codes
                 students.Add(student);
             }
 
-            //con.Close(); - Kun hvis man ikke har using
 
             return students;
         }
@@ -89,8 +87,6 @@ namespace FagTilmeldingApp.Codes
                 courses.Add(course);
             }
 
-            //con.Close(); - Kun hvis man ikke har using
-
             return courses;
         }
 
@@ -116,7 +112,6 @@ namespace FagTilmeldingApp.Codes
                 enrollments.Add(enrollment);
             }
 
-            //con.Close(); - Kun hvis man ikke har using
 
             return enrollments;
         }
@@ -144,18 +139,6 @@ namespace FagTilmeldingApp.Codes
 
             command.ExecuteNonQuery();
         }
-
-        //public void DeleteEnrollment(int elevid)
-        //{
-        //    List<Enrollment> enrollments = new List<Enrollment>();
-
-        //    using SqlConnection con = new SqlConnection(ConnectionString);
-        //    con.Open();
-
-        //    SqlCommand command = new SqlCommand("DELETE FROM Class", con);
-
-        //    command.ExecuteNonQuery();
-        //}
 
 
     }
