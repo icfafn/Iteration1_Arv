@@ -15,11 +15,11 @@ List<Class> Elist = eHandler.GetEnrollment();
 
 eHandler.ClearEnrollment();
 
-Console.Write("Angiv skole: ");
+Console.Write("Angiv Skole: ");
 AngivSkole = Console.ReadLine();
-Console.Write("Angiv hovedforløb: ");
+Console.Write("Angiv Hovedforløb: ");
 AngivForløb = Console.ReadLine();
-Console.Write("Angiv uddannelseslinje: ");
+Console.Write("Angiv Uddannelseslinje: ");
 AngivLinje = Console.ReadLine();
 
 Semester s = new(AngivSkole, AngivForløb);
@@ -27,9 +27,9 @@ Semester s = new(AngivSkole, AngivForløb);
 do
 {
     Console.Clear();
-    Console.WriteLine("Angiv skole: " + AngivSkole);
-    Console.WriteLine("Angiv hovedforløb: " + AngivForløb);
-    Console.WriteLine("Angiv uddannelseslinje: " + AngivLinje);
+    Console.WriteLine("Angiv Skole: " + AngivSkole);
+    Console.WriteLine("Angiv Hovedforløb: " + AngivForløb);
+    Console.WriteLine("Angiv Uddannelseslinje: " + AngivLinje);
     Console.WriteLine("\nØnsker du at angiv en kort beskrivelse af uddannelseslinje?:  ");
     Console.WriteLine("1) Ja");
     Console.WriteLine("2) Nej");
@@ -63,7 +63,7 @@ while (mainflag)
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("----------------------------------------------------------------");
     Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine(s.SchoolName + ", " + s.UddannelsesLinje + ", " + s.SemesterNavn + " " + "fag timelding app.");
+    Console.WriteLine(s.SchoolName + ", " + s.UddannelsesLinje + ", " + s.SemesterNavn + " " + "Fag tilmelding app.");
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine(s.UddannelseslinjeBeskrivelse);
     Console.ForegroundColor = ConsoleColor.White;
@@ -98,7 +98,7 @@ while (mainflag)
     foreach (Student student in students)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write(student.FirstName + " " + student.LastName + " tilmeldt fag ");
+        Console.Write(student.FirstName + " " + student.LastName + " Tilmeldt fag ");
         
     }
     foreach (Course course in courses)
@@ -158,7 +158,7 @@ while (mainflag)
             else if (valid3.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                errormsg = ("Kursen findes ikke");
+                errormsg = ("Kursus findes ikke");
                 UserElevId = 0;
                 UserCourseId = 0;
             }
@@ -182,7 +182,7 @@ while (mainflag)
     else
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("\nStudent already exist in that class - Try again!");
+        Console.WriteLine("\nEleven findes allerede i denne klasse");
         UserElevId = 0;
         UserCourseId = 0;
         Console.ReadKey();
