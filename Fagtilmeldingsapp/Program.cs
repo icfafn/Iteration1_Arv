@@ -96,7 +96,7 @@ while (true)
 
     while (UserCourseId != null)
     {
-        Console.WriteLine("\nKurse ID: ");
+        Console.WriteLine("\nKursus ID: ");
         try
         {
             UserCourseId = Convert.ToInt32(Console.ReadLine());
@@ -108,7 +108,7 @@ while (true)
             }
             else
             {
-                Console.WriteLine("Kurse findes ikke");
+                Console.WriteLine("Kursus findes ikke");
             }
         }
         catch
@@ -124,7 +124,7 @@ while (true)
     }
     else
     {
-        Console.WriteLine("\nStudent already exist in that class - Try again!");
+        Console.WriteLine("\nStudent findes allerede i denne klasse");
         UserElevId = 0;
         UserCourseId = 0;
         Console.ReadKey();
