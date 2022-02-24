@@ -8,11 +8,12 @@ namespace FagTilmeldingApp.Codes
 {
     internal sealed class Semester : School
     {
-        string SemesterNavn { get; set; }
+        public string? SemesterNavn { get; set; }
 
-        public Semester(string semesterNavn, string schoolName) : base(schoolName)
+        public Semester(string semesterNavn, String schoolName) : base(schoolName)
         {
             SemesterNavn = semesterNavn;
         }
+
     }
 }
