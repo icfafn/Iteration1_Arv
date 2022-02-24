@@ -12,7 +12,6 @@ namespace FagTilmeldingApp.Codes
         public string? CourseName { get; set; }
         public int? TeacherId { get; set; }
 
-        //Sort by letters
 
         public int CompareTo(Course next)
         {
