@@ -9,7 +9,7 @@ List<Course> KurseList = new()
     new Course() { CourseId = 5, CourseName = "Clientside Programmering", TeacherId = 2 }
 };
 
-Console.WriteLine("Usorteret list: ");
+Console.WriteLine("Usorteret liste: ");
 Console.WriteLine("-----------------------------------------------------------------");
 
 foreach (Course c in KurseList)
@@ -19,7 +19,7 @@ foreach (Course c in KurseList)
 
 Console.WriteLine("-----------------------------------------------------------------");
 
-Console.WriteLine("Sorteret list: ");
+Console.WriteLine("Sorteret liste: ");
 Console.WriteLine("-----------------------------------------------------------------");
 
 KurseList.Sort();
@@ -31,7 +31,7 @@ foreach (Course b in KurseList)
 
 Console.WriteLine("-----------------------------------------------------------------");
 
-Console.WriteLine("Bagvendt Sorteret list: ");
+Console.WriteLine("Bagvendt Sorteret liste: ");
 Console.WriteLine("-----------------------------------------------------------------");
 
 KurseList.Reverse();
