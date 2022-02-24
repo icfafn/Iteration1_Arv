@@ -31,7 +31,7 @@ foreach (Course b in KurseList)
 
 Console.WriteLine("-----------------------------------------------------------------");
 
-Console.WriteLine("Reverse Sorteret list: ");
+Console.WriteLine("Bagvendt Sorteret list: ");
 Console.WriteLine("-----------------------------------------------------------------");
 
 KurseList.Reverse();
