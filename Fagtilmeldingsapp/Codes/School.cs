@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace FagTilmeldingApp.Codes
 {
-    internal class School 
+    internal abstract class School
     {
-        string SchoolName { get; set; }
+        public string? SchoolName { get; set; }
 
-        public School (string schoolName)
+        public School(string schoolName)
         {
             SchoolName = schoolName;
         }
+        public abstract void SetUddannelsesLinje(string? uddannelseslinje);
+
     }
 }
