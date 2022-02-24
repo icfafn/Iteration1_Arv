@@ -4,11 +4,11 @@ string AngivSkole;
 string AngivForløb;
 string AngivLinje;
 
-Console.WriteLine("Angiv skole: ");
+Console.WriteLine("Angiv Skole: ");
 AngivSkole = Console.ReadLine();
-Console.WriteLine("Angiv hovedforløb: ");
+Console.WriteLine("Angiv Hovedforløb: ");
 AngivForløb = Console.ReadLine();
-Console.WriteLine("Angiv uddannelseslinje: ");
+Console.WriteLine("Angiv Uddannelseslinje: ");
 AngivLinje = Console.ReadLine();
 
 Semester s = new(AngivSkole, AngivForløb);
@@ -64,7 +64,7 @@ while (true)
     List<Course> courses = KurseList.Where(a => a.CourseId == UserCourseId).ToList();
     foreach (Student student in students)
     {
-        Console.Write(student.ForNavn + " " + student.EfterNavn + " tilmeldt fag ");
+        Console.Write(student.ForNavn + " " + student.EfterNavn + " Tilmeldt fag ");
     }
     foreach (Course course in courses)
     {
@@ -97,7 +97,7 @@ while (true)
 
     while (UserCourseId != null)
     {
-        Console.WriteLine("\nKurse ID: ");
+        Console.WriteLine("\nKursus ID: ");
         try
         {
             UserCourseId = Convert.ToInt32(Console.ReadLine());
@@ -109,7 +109,7 @@ while (true)
             }
             else
             {
-                Console.WriteLine("Kurse findes ikke");
+                Console.WriteLine("Kursus findes ikke");
             }
         }
         catch
@@ -125,7 +125,7 @@ while (true)
     }
     else
     {
-        Console.WriteLine("\nStudent already exist in that class - Try again!");
+        Console.WriteLine("\nEleven findes allerede i klassen");
         UserElevId = 0;
         UserCourseId = 0;
         Console.ReadKey();
