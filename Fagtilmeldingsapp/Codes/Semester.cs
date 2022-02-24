@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +9,10 @@ namespace FagTilmeldingApp.Codes
     internal sealed class Semester : School
     {
         public string? SemesterNavn { get; set; }
-        public string? Uddannelseslinje { get; set; }
-        public string? Uddannelsesbeskrivelse { get; set; }
 
-        public Semester(string schoolName, string semesterNavn) : base(schoolName)
+        public Semester(string semesterNavn, String schoolName) : base(schoolName)
         {
             SemesterNavn = semesterNavn;
-        }
-        public override void SetUddannelsesLinje(string uddannelseslinje)
-        {
-            Uddannelseslinje = uddannelseslinje;
-        }
-        public override void SetUddannelsesLinje(string uddannelseslinje, string uddannelsesbeskrivelse)
-        {
-            Uddannelseslinje = uddannelseslinje;
-            Uddannelsesbeskrivelse = "[ " + uddannelsesbeskrivelse + " ]";
         }
 
     }
