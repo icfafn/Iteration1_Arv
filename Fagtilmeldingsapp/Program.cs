@@ -1,5 +1,6 @@
 using FagTilmeldingApp.Codes;
 
+
 List<Course> KurseList = new()
 {   
     new Course() { CourseId = 9, CourseName = "Grundlæggende Programmering", TeacherId = 1 },
@@ -15,7 +16,6 @@ foreach (Course c in KurseList)
 {
     Console.WriteLine(c.CourseId + ". " + c.CourseName);
 }
-
 
 Console.WriteLine("-----------------------------------------------------------------");
 
