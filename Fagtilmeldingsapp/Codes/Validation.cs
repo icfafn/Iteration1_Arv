@@ -20,7 +20,6 @@ namespace FagTilmeldingApp.Codes
             else
             {
                 CourseModel? fagId = listCourses.FirstOrDefault(a => a.Id == result);
-                // eksistere id ikke.
                 if (fagId == null)
                 {
                     succes = false;
@@ -41,7 +40,7 @@ namespace FagTilmeldingApp.Codes
             else
             {
                 StudentModel? studentId = listStudents.FirstOrDefault(a => a.Id == result);
-                // Hvis ingen match er, eksistere id ikke.
+
                 if (studentId == null)
                 {
                     succes = false;
