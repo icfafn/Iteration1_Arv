@@ -1,20 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fagtilmeldingsapp.Codes
+namespace FagTilmeldingApp.Codes
 {
-    internal class School
+    internal class School 
     {
-        public string? SchoolName;
-        public School()
+        string SchoolName { get; set; }
+
+        public School (string schoolName)
         {
-            Console.Write("Angiv Skole: ");
-            SchoolName = Console.ReadLine();
+            SchoolName = schoolName;
         }
     }
-    
-        
 }
